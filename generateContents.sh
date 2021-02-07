@@ -19,7 +19,7 @@ tree()
     for file in *;
     do
         #if判断，判断是不是文件，如果是文件的话，将该文件名写入Content.txt
-        if [ -f "$file" ] && [[ ${file} != *generateContents.sh* ]]; then
+        if [ -f "$file" ] && [[ ${file} != *generateContents.sh* ]] && [[ ${file} == *.md ]]; then
 
 
             curPath=`readlink -f $file | sed 's/\/e\/Note/./g'`
@@ -28,7 +28,7 @@ tree()
         fi
 
         #if判断，判断是不是文件夹，如果是文件夹的话，将该文件夹的名称写入Content.txt
-        if [ -d "$file" ] && [[ ${file} != *generateContents.sh* ]]; then
+        if [ -d "$file" ] && [[ ${file} != *generateContents.sh* ]]&& [[ ${file} != *.assets ]]; then
             #1、将该文件夹的名称写入Content.txt
             echo "${sblankblank}**$file**" >> "${myPath}/Content.md"
             #2、在“└────”的前面填充“    ”
@@ -61,13 +61,17 @@ stty $SAVEDSTTY
 }
 
 
-
-echo "Contents generate successful"
+echo ""
+echo "Contents generate successful!"
+echo ""
 echo "Press any key to continue..."
 char=`get_char` 
 
 git add . && git commit -m "1" && git push
 
+echo ""
+echo ""
 echo "git add . && git commit -m "1" && git push successful"
+echo ""
 echo "Press any key to continue..."
 char=`get_char` 
