@@ -1,5 +1,7 @@
 #!/bin/bash
-# markdown目录生成 v1.1
+# markdown目录生成 v1.2
+# 作者：duan[cseve.com]
+# 功能：生成目录
 
 if [ -f _sidebar.md ] ; then
   rm _sidebar.md
@@ -7,10 +9,14 @@ fi
 
 #记录当前所在的路径
 myPath="$PWD"
+
 #将会填充blank
 sblank="  "
+
 #blank将会填充在“└────”的前面
+
 sblankblank="- "
+
 # 获取当前目录
 relPath=`pwd`
 
@@ -49,15 +55,14 @@ tree()
 
 }
 
-get_char()
-{
-SAVEDSTTY=`stty -g`
-stty -echo
-stty raw
-dd if=/dev/tty bs=1 count=1 2> /dev/null
-stty -raw
-stty echo
-stty $SAVEDSTTY
+get_char(){
+    SAVEDSTTY=`stty -g`
+    stty -echo
+    stty raw
+    dd if=/dev/tty bs=1 count=1 2> /dev/null
+    stty -raw
+    stty echo
+    stty $SAVEDSTTY
 }
 
 
